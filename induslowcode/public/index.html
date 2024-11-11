@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndusLowCode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <h3>App Explorer</h3>
+            <input type="text" placeholder="Search..." class="search-bar">
+        </div>
+        <ul class="module-list">
+            <li class="module-item" onclick="toggleTree(this)">
+                <span class="icon project-icon"></span>
+                <span class="module-title">App</span>
+                <ul class="sub-module-list">
+                    <li class="sub-module-item" onclick="event.stopPropagation(); toggleTree(this)">
+                        <span class="icon folder-icon"></span>
+                        Domain model
+                        <ul class="sub-sub-module-list">
+                            <li class="sub-module-item">Entity 1</li>
+                            <li class="sub-module-item">Entity 2</li>
+                        </ul>
+                    </li>
+                    <li class="sub-module-item" onclick="event.stopPropagation(); toggleTree(this)">
+                        <span class="icon folder-icon"></span>
+                        Workflows
+                        <ul class="sub-sub-module-list">
+                            <li class="sub-module-item">Workflow A</li>
+                            <li class="sub-module-item">Workflow B</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="module-item" onclick="toggleTree(this)">
+                <span class="icon system-icon"></span>
+                <span class="module-title">System</span>
+                <ul class="sub-module-list">
+                    <li class="sub-module-item" onclick="event.stopPropagation(); toggleTree(this)">
+                        <span class="icon folder-icon"></span>
+                        Domain model
+                        <ul class="sub-sub-module-list">
+                            <li class="sub-module-item">ContextType</li>
+                            <li class="sub-module-item">DeviceType</li>
+                        </ul>
+                    </li>
+                    <li class="sub-module-item">Images</li>
+                </ul>
+            </li>
+            <li class="module-item" onclick="toggleTree(this)">
+                <span class="icon module-icon"></span>
+                <span class="module-title">Module</span>
+                <ul class="sub-module-list" id="folderContents"> <!-- 绑定ID到此 -->
+                    <!-- Folder contents will be dynamically loaded here -->
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        // // 渲染文件夹目录结构
+        // function renderFolderTree(folderContents, parentElement) {
+        //     folderContents.forEach(item => {
+        //         const itemElement = document.createElement('li');
+        //         itemElement.classList.add('sub-module-item');
+        //         itemElement.textContent = item.name;
+
+        //         // 如果是文件夹，则需要递归渲染子文件夹
+        //         if (item.type === 'directory') {
+        //             itemElement.classList.add('folder-item');
+        //             const subList = document.createElement('ul');
+        //             subList.classList.add('sub-sub-module-list');
+        //             renderFolderTree(item.children, subList);  // 递归渲染子目录
+        //             itemElement.appendChild(subList);
+
+        //             // 添加点击事件，控制子文件夹的展开和折叠
+        //             itemElement.addEventListener('click', (event) => {
+        //                 event.stopPropagation();  // 阻止事件冒泡
+        //                 toggleTree(itemElement);  // 切换子文件夹的显示状态
+        //             });
+        //         }
+
+        //         parentElement.appendChild(itemElement);  // 将渲染的文件夹或文件添加到父元素
+        //     });
+        // }
+
+        // 控制树状结构的展开和折叠
+        function toggleTree(element) {
+            console.log('toggleTree', element);
+            const subModuleList = element.querySelector('ul');
+            if (subModuleList) {
+                // 通过添加或移除'block'类来切换文件夹显示
+                subModuleList.style.display = subModuleList.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+        // onFolderContents(handleFolderContents);
+        // const handleFolderContents = (folderContents) => {
+        //     const folderContentsElement = document.getElementById('folderContents');
+        //     folderContentsElement.innerHTML = ''; // 清空内容
+        //     console.log('更新文件夹内容', folderContents);
+        //     renderFolderTree(folderContents, folderContentsElement);  // 渲染文件夹树
+        // };
+    </script>
+    <script src="../src/render.js"></script>
+</body>
+
+</html>
